@@ -17,6 +17,7 @@
 <th>Title</th>
 <th>ISBN</th>
 <th>Year</th>
+<th>Category</th>
 </tr>
 </thead>
 <tbody>
@@ -25,6 +26,7 @@
 <td th:text="${book.title}">title</td>
 <td th:text="${book.isbn}">isbn</td>
 <td th:text="${book.year}">year</td>
+<td th:text="${book.category.name}"></td> <!-- on sama kuin student.getDepartment().getName() -->	
 <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td><!-- @{/delete/{id} on endpoint, {id} on pathvariable, joka on määritelty bookcontrollerissa} -->
 <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
 </tr>
