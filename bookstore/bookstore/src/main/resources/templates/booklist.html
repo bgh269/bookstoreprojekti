@@ -3,26 +3,34 @@
 <head>
 <title>Book list</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}"/>
 </head>
 <body>
 <h1>Books</h1>
-<table>
+<table class="table table-striped">
 <!-- th:each käy läpi yksitellen listaa -->
 <!-- th:text näyttää tekstiä -->
 <!-- tr=table row, th=header cells, td=standard cells -->
+<thead>
 <tr>
 <th>Author</th>
 <th>Title</th>
 <th>ISBN</th>
 <th>Year</th>
 </tr>
-<tr th:each="book :${books}"><!-- ${books} on model-mapin keyword hakee model-mappiin tallennettua tietoa-->
-<td th:text="${book.author}">author</td>
+</thead>
+<tbody>
+<tr th:each="book :${books}" ><!-- ${books} on model-mapin keyword hakee model-mappiin tallennettua tietoa book listasta-->
+<td th:text="${book.author}">author</td> <!-- book viittaa edellisen rivin book:iin (yksittäinen kirja), johon on tallennettu modelmapista books-keywordillä tallennettua tieto -->
 <td th:text="${book.title}">title</td>
 <td th:text="${book.isbn}">isbn</td>
 <td th:text="${book.year}">year</td>
+<td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td><!-- @{/delete/{id} on endpoint, {id} on pathvariable, joka on määritelty bookcontrollerissa} -->
+<td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
 </tr>
+</tbody>
 </table>
-<!-- <a href="/newbook">New Book</a> -->
+<a class="btn btn-success" href="add">Add Book</a> <!-- linkki addbook sivulle -->
+
 </body>
 </html>

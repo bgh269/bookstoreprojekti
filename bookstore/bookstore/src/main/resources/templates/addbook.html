@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Add new book</title>
+</head>
+<body>
+<h1>Add book</h1>
+<div>
+<form th:object="${book}" th:action="@{save}" action="#" method="post"> <!-- @{save} on endpoint, An action of # indicates that the form stays on the same page -->
+<label for=>Author</label>
+<input type="text" id="author" th:field="*{author}" /></br> <!-- *{author} on lyhennys tästä ${book.author} -->
+<label for=>Title</label>
+<input type="text" id="title" th:field="*{title}" /></br>
+<label for=>ISBN</label>
+<input type="text" id="isbn" th:field="*{isbn}" /></br>
+<label for=>Year</label>
+<input type="text" id="year" th:field="*{year}" /></br>
+<input type="submit" value="Save"></input>
+</form>
+</div>
+</body>
+</html>
