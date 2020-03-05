@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Categories list</title>
+</head>
+<body>
+<h1>Categories list</h1>
+<table>
+<tr>
+<th>Category name</th>
+</tr>
+<tr th:each="category: ${categories}">
+<td th:text="${category.name}">category</td>
+</tr>
+</table>
+<a th:href="@{/booklist}">Back to book list</a>
+</body>
+</html>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
+import hh.swd20.bookstore.domain.Category;
 import hh.swd20.bookstore.domain.CategoryRepository;
 
 @Controller
@@ -35,16 +36,28 @@ public class BookController {
 	public String getAllBooks(Model model) {
 		// haetaan tietokannasta kirjat listaan
 		List<Book> books = (List<Book>)bookRepository.findAll();
-		// laitetaan model-mapin autolista templatea varten
+		// laitetaan model-mappiin kirjalista templatea varten
 		model.addAttribute("books", books); // findAll:in,"books" on model-mapin keyword, books on java-kielen muuttuja
 		// palautetaan sopivan käyttöliittymätemplaten nimi
 		return "booklist"; //booklist.html
 	}
+	// categorialistaus
+	@RequestMapping(value="/categorylist", method=RequestMethod.GET)
+	public String getAllCategories(Model model) {
+		// haetataan tietokannasta categoriat listaan
+		List<Category> categories = (List<Category>) crepository.findAll();
+		// laitetaan model-mappiin  categorialista templatea varten
+		model.addAttribute("categories", categories);
+		// palautetaan sopivan käyttöliittymä templaten nimi
+		return "categorylist";
+	}
+	
 	// kirjan lisäys
 	// tyhjän kirjalomakkeen muodostaminen
 	@RequestMapping(value="/add", method=RequestMethod.GET)
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", crepository.findAll());
 		return "addbook"; //bookform.html
 	}
 	
