@@ -1,6 +1,7 @@
 package hh.swd20.bookstore.webcontroller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
@@ -23,7 +25,7 @@ public class BookController {
 	@Autowired //automaattisesti ulkopuolelta kytkee tietokannan käsittelyolion
 	BookRepository bookRepository;  //tässä kerrotaan rajapinta
 	
-	@Autowired
+	@Autowired //liittyy lähimpään yhteen rakenteeseen
 	private CategoryRepository crepository;
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
@@ -41,6 +43,31 @@ public class BookController {
 		// palautetaan sopivan käyttöliittymätemplaten nimi
 		return "booklist"; //booklist.html
 	}
+	
+	// TÄSSÄ REST-METODI
+	// RESTful service to get all books
+	@RequestMapping(value="/books", method=RequestMethod.GET) //(jacksonkirjasto)@ResponseBody muuttaa (java)List<Student> (JSON)muotoon
+	public @ResponseBody List<Book> bookListRest() {	//pyydetään tietokannasta opiskelijalista ja suoraan palautetaan(return)
+		return (List<Book>) bookRepository.findAll();
+	}
+	
+	// TÄSSÄ REST-METODI
+	// RESTful service to get book by id
+	// Optional is a container object used to contain not-null objects. Optional object is used to represent null with absent value.
+	@RequestMapping(value="/books/{id}", method=RequestMethod.GET)
+	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId){
+		return bookRepository.findById(bookId);
+	}
+	
+	// on olemassa autogeneroituja rest-metodeja => lisää pom:iin dependencyyn 
+	//<dependency>
+	//<groupId>org.springframework.boot</groupId>
+	//<artifactId>spring-boot-starter-data-rest</artifactId>
+	//</dependency>
+	// ja application.propertiesiin(spring.data.rest.basePath=/api)
+    // REST-METODI POST LÄHETTÄÄ TIETOA
+	
+	
 	// categorialistaus
 	@RequestMapping(value="/categorylist", method=RequestMethod.GET)
 	public String getAllCategories(Model model) {

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Book {
 
@@ -21,7 +23,8 @@ public class Book {
 	private double price;
 	
 	//lisää uusi categoria
-	@ManyToOne
+	@ManyToOne	// ManyToOne yhteys Category.java luokkaan
+	@JsonIgnore // tämä täytyy laittaa, ettei tule ikuista looppia RESTiä käytettäessä
 	@JoinColumn(name = "categoryId") //yhdistää rivin, jonka nimi on categoryId Category luokassa 
 	private Category category;
 	
@@ -113,7 +116,7 @@ public class Book {
 	@Override
 	public String toString() {
 		if (this.category != null)
-			return "Book [id=" + id + ", name=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
 					+ ", price=" + price + "category=" + this.getCategory() + "]";
 		else
 			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn

@@ -37,6 +37,9 @@ public class BookstoreApplication {
 			bookRepository.save(new Book("Animal Farm", "George Orwell", 1945, "2212343-5", 10.00, crepository.findByName("Satire").get(0)));
 			bookRepository.save(new Book("Havukka-ahon ajattelija", "Veikko Huovinen", 1952, "9876543-21", 30.00, crepository.findByName("Literature").get(0)));
 			bookRepository.save(new Book("Jäniksen vuosi", "Arto Paasilinna", 1975, "951-35-1252-5", 35.00, crepository.findByName("Humor").get(0)));
+			bookRepository.save(new Book("Rest testi", "Sauli Niinistö", 2020, "111-111", 10.00, crepository.findByName("Humor").get(0)));
+			bookRepository.save(new Book("Kirja", "Urho Kekkonen", 1970,"222-222-2", 5.00, crepository.findByName("Satire").get(0)));
+			
 			log.info("fetch all books");
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());

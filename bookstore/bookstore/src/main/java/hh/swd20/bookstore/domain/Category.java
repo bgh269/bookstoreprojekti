@@ -16,6 +16,8 @@ public class Category {
 	private Long categoryId;
 	private String name;
 	
+	// OneToMany yhteyden luonti Book.java luokkaan
+	// cascade, jos kategoria poistetaan myös sen sisältämät kirjat poistetaan
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") //mapattu category on oltava täysin sama attribuutti Category luokalla Book.java
 	private List<Book> books;
 	
@@ -24,7 +26,7 @@ public class Category {
 	
 	}
 
-	public Category(String name) { //hox poista tästä categoryId
+	public Category(String name) { //hox poista tästä categoryId parametri
 		super();
 		this.name = name;
 	}
