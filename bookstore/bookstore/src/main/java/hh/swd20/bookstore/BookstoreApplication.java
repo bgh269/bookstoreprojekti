@@ -11,6 +11,8 @@ import hh.swd20.bookstore.domain.Book;
 import hh.swd20.bookstore.domain.BookRepository;
 import hh.swd20.bookstore.domain.Category;
 import hh.swd20.bookstore.domain.CategoryRepository;
+import hh.swd20.bookstore.domain.User;
+import hh.swd20.bookstore.domain.UserRepository;
 
 @SpringBootApplication //tämä annotaatio mahdollistaa automaattisen määrityksen
 public class BookstoreApplication {
@@ -23,7 +25,7 @@ public class BookstoreApplication {
 
 //  testidatan luonti H2-testitietokantaan aina sovelluksen käynnistyessä
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository crepository) {
+	public CommandLineRunner bookDemo(BookRepository bookRepository, CategoryRepository crepository, UserRepository urepository) {
 		return (args) -> {
 			log.info("save a couple of books");
 			
@@ -49,7 +51,18 @@ public class BookstoreApplication {
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString());
 			}
-
+			
+			// Create users: admin/admin user/user oliot (username, email, password, rooli)
+			// käytä BCrypt Calculator => saa kryptatun salasanan, tämä kerrottuna WebSecurityConfigissa
+			User user1 = new User("user", "esimerkki1@email.com","$2a$10$lCZCYUgHdxblwWs.6cT93uBJ3/gdlz1wYdKeGZm60FDNSwFN3wSoi", "USER");
+			User user2 = new User("admin", "esimerkki2@email.com", "$2a$10$srIHYmqh8oNKDhyyNG4iOe2wHvgzr246eyd/iz18oBbKg.enrS5Pi", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
+			
+			log.info("fecth all users");
+			for (User user : urepository.findAll()) {
+				log.info(user.toString());
+			}
 		};
 	}
 }

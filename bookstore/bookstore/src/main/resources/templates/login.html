@@ -23,6 +23,9 @@
 			<div>
 				<input type="submit" value="Sign In" class="btn btn-primary" />
 			</div>
+			<div> <!-- tämä on Cross-site Request Forgery iskua vastaan -->
+			<input type="hidden" name="_csrf" value="d63f746f-c5f6-4cc6-99c0-9220ff784b23" />
+ 			</div>
 		</form>
 	</div>
 </body>

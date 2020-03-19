@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -107,7 +108,9 @@ public class BookController {
 	// =>tallennetaan kirja silloin sen id:n kohdalle
 	// deleteBook metodi kuuntelee /delete/bookId endpointia
 	// eli http://localhost:8080/delete/5, niin @PathVariable bookId on 5
+	// metodin turvaamiseksi @PreAuthorize
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteBook(@PathVariable("id")Long bookId, Model model) {
 		bookRepository.deleteById(bookId);
 		return "redirect:../booklist";

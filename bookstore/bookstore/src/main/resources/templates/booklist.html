@@ -47,7 +47,7 @@
 				<td th:text="${book.category.name}"></td>
 				<!-- on sama kuin student.getDepartment().getName() -->
 				<!-- sec:authorize toiminto varmistaa, että käyttäjä on admin, jotta delete tulee näkyviin, muuten piilossa-->
-				<td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}"
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${book.id})}"
 					class="btn btn-danger">Delete</a></td>
 				<!-- @{/delete/{id} on endpoint, {id} on pathvariable, joka on määritelty bookcontrollerissa} -->
 				<td><a th:href="@{/edit/{id}(id=${book.id})}"
