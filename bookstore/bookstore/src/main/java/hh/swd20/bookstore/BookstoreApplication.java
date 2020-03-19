@@ -32,6 +32,11 @@ public class BookstoreApplication {
 			crepository.save(new Category("Satire"));
 			crepository.save(new Category("Realism"));
 			
+			log.info("fetch all categories");
+			for (Category category : crepository.findAll()) {
+				log.info(category.toString());
+			}
+			
 			//title, author, year, isbn, price
 			bookRepository.save(new Book("A Farewell to Arms", "Ernest Hemingway", 1929, "1232323-21", 15.00, crepository.findByName("Realism").get(0)));
 			bookRepository.save(new Book("Animal Farm", "George Orwell", 1945, "2212343-5", 10.00, crepository.findByName("Satire").get(0)));

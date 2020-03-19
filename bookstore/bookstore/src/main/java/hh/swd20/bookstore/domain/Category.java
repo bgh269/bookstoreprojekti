@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Category {
 	@Id
@@ -18,6 +20,7 @@ public class Category {
 	
 	// OneToMany yhteyden luonti Book.java luokkaan
 	// cascade, jos kategoria poistetaan myös sen sisältämät kirjat poistetaan
+	@JsonBackReference // tämä tarvitaan, koska Book luokassa on @JsonManagedReference-annotaatio
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") //mapattu category on oltava täysin sama attribuutti Category luokalla Book.java
 	private List<Book> books;
 	

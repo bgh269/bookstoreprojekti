@@ -28,6 +28,12 @@ public class BookController {
 	@Autowired //liittyy lähimpään yhteen rakenteeseen
 	private CategoryRepository crepository;
 	
+	// login sivu
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String getBook(Model model) {
 		return "index";	
@@ -104,13 +110,14 @@ public class BookController {
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
 	public String deleteBook(@PathVariable("id")Long bookId, Model model) {
 		bookRepository.deleteById(bookId);
-		return "redirect:/booklist";
+		return "redirect:../booklist";
 	}
 	
 	// yhden kirjan editointi id:n perusteella
 	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String editBook(@PathVariable("id")Long bookId, Model model) {
 		model.addAttribute("book", bookRepository.findById(bookId));
-		return "editbook";
+		model.addAttribute("categories", crepository.findAll());
+		return "editbook"; 
 	}
 }

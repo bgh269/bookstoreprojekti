@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Book {
@@ -23,8 +24,10 @@ public class Book {
 	private double price;
 	
 	//lisää uusi categoria
-	@ManyToOne	// ManyToOne yhteys Category.java luokkaan
-	@JsonIgnore // tämä täytyy laittaa, ettei tule ikuista looppia RESTiä käytettäessä
+	// ManyToOne yhteys Category.java luokkaan
+	@ManyToOne
+	//@JsonIgnore // tämä täytyy laittaa, ettei tule ikuista looppia RESTiä käytettäessä
+	@JsonManagedReference // tämä @JsonIgnoren tilalle, jotta voi hakea ja lisätä kirjan tietoja REST-palvelussa
 	@JoinColumn(name = "categoryId") //yhdistää rivin, jonka nimi on categoryId Category luokassa 
 	private Category category;
 	

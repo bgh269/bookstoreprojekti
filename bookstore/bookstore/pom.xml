@@ -19,6 +19,17 @@
 	</properties>
 
 	<dependencies>
+		<!-- tämä tarvitaan(alla), jotta endpointien suojaus voidaan tehdä-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!-- tämä tarvitaan(alla), jotta kosmeettinen suojaus (view)voidaan tehdä-->
+		<dependency>
+        	<groupId>org.thymeleaf.extras</groupId>
+        	<artifactId>thymeleaf-extras-springsecurity5</artifactId> <!-- muuta versio 5:ksi -->
+    	</dependency>
+    	<!-- tämä tarvitaan(alla), jotta Spring Data REST alkaa toimia-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
