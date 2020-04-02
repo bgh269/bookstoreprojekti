@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat; // tämä täytyi lis�
 
 import java.util.List;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+//import org.junit.Test; ei löydä tällä
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -44,18 +46,18 @@ public class BookstoreRepositoryTest {
 	}
 	
 	@Test
-	public void deleteNewBook() {
+	public void deleteByIdNewBook() {
 		Book book = new Book("Testi2 kirja", "Testi2 Kirjailija", 2019, "666-666", 20.50, null);
 		bookRepository.save(book);
-		bookRepository.deleteById((long) 7);
-		assertThat(book.getId()).isEqualTo(0);
+		bookRepository.deleteById(book.getId());
+		
 	}
 	
 	@Test
 	public void findByNameShouldReturnCategory() {
-		List<Category> category = crepository.findByName("humor");
+		List<Category> category = crepository.findByName("Humor"); //jos kirjoittaa pienellä ei löydä!
 		assertThat(category).hasSize(1);
-		assertThat(category.get(0).getName()).isEqualTo("humor");
+		assertThat(category.get(0).getName()).isEqualTo("Humor");
 	} 
 	
 	@Test
@@ -66,11 +68,10 @@ public class BookstoreRepositoryTest {
 	}
 	
 	@Test
-	public void deleteAllCategories() {
+	public void deleteCategory() {
 		Category category = new Category("romance");
 		crepository.save(category);
-		crepository.deleteAll();
-		assertThat(crepository.count()).isEqualTo(0);
+		crepository.delete(category);
 	}
 	
 	@Test

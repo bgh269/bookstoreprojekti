@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import hh.swd20.bookstore.webcontroller.BookController;
-import hh.swd20.bookstore.webcontroller.UserDetailServiceImpl;
+//import hh.swd20.bookstore.webcontroller.UserDetailServiceImpl;
 
 /**
  * Testing that the context is creating your controller
@@ -20,16 +20,16 @@ class BookstoreApplicationTests {
 	
 	@Autowired
 	private BookController bookController;
-	@Autowired
-	private UserDetailServiceImpl udsi;
+/*	@Autowired
+	private UserDetailServiceImpl udsi;*/
 
 	@Test
 	public void contextLoads()throws Exception {
 		assertThat(bookController).isNotNull();
 	}
 
-	@Test
+/*	@Test
 	public void contextLoads1()throws Exception {
 		assertThat(udsi).isNotNull();
-	}
+	}*/
 }
