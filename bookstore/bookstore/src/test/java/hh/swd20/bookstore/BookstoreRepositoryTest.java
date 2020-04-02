@@ -19,7 +19,7 @@ import hh.swd20.bookstore.domain.UserRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class BookRepositoryTest {
+public class BookstoreRepositoryTest {
 	
 	@Autowired
 	private BookRepository bookRepository;
